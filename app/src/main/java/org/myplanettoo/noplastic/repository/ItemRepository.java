@@ -22,13 +22,13 @@ public class ItemRepository extends Repository {
 
     public LiveData<Long> getCountInfo() {
         MediatorLiveData<Long> liveData = new MediatorLiveData<>();
-        loadUserDetail(liveData);
+        loadCountInfo(liveData);
 
         return liveData;
     }
 
     @Background
-    void loadUserDetail(final MediatorLiveData<Long> liveData) {
+    void loadCountInfo(final MediatorLiveData<Long> liveData) {
         liveData.addSource(itemDao.getCountInfo(), new Observer<Long>() {
             @Override
             public void onChanged(@Nullable Long userDetail) {
