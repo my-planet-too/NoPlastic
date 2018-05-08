@@ -1,10 +1,12 @@
 package org.myplanettoo.noplastic.service;
 
+import android.app.NotificationChannel;
 import android.app.NotificationManager;
 import android.app.PendingIntent;
 import android.app.Service;
 import android.arch.lifecycle.Observer;
 import android.content.Intent;
+import android.os.Build;
 import android.os.IBinder;
 import android.support.annotation.Nullable;
 import android.support.v4.app.NotificationCompat;
@@ -23,6 +25,7 @@ import org.myplanettoo.noplastic.ui.activity.MainActivity_;
 @EService
 public class NoPlasticService extends Service {
     public static final String TAG = "NoPlasticService";
+    public static final String CHANNEL_ID = "no_plastic_channel";
 
     @SystemService
     NotificationManager notificationManager;
@@ -35,9 +38,23 @@ public class NoPlasticService extends Service {
         return null;
     }
 
+    public void initChannels() {
+        if (Build.VERSION.SDK_INT < 26) {
+            return;
+        }
+
+        NotificationChannel channel = new NotificationChannel(CHANNEL_ID,
+                "No Plastic channel",
+                NotificationManager.IMPORTANCE_DEFAULT);
+        channel.setDescription("No Plastic  description");
+        notificationManager.createNotificationChannel(channel);
+    }
+
     @Override
     public int onStartCommand(Intent intent, int flags, int startId) {
         itemDao = NoPlasticDatabase.getInstance(getApplicationContext()).itemDao();
+
+        initChannels();
         processThread();
 
         return Service.START_NOT_STICKY;
@@ -97,6 +114,7 @@ public class NoPlasticService extends Service {
                 .setContentTitle(title)
                 .setContentText(content)
                 .setContentIntent(pendingIntent)
+                .setChannelId(CHANNEL_ID)
                 .setPriority(NotificationCompat.PRIORITY_DEFAULT);
 
         notificationManager.notify(2, mBuilder.build());
