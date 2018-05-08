@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">NoPlastic</string>
+    <string name="main_default_count">21</string>
 </resources>
