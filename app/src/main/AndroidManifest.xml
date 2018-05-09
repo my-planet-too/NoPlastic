@@ -21,10 +21,13 @@
         <activity android:name=".ui.activity.InfoActivity_">
         </activity>
 
-        <service
-            android:name=".service.NoPlasticService_"
-            >
-        </service>
+        <!--<service-->
+        <!--android:name=".service.NoPlasticService_"-->
+        <!--&gt;-->
+        <!--</service>-->
+        <receiver
+            android:name="AlarmReciever"
+            android:enabled="true" />
     </application>
 
 </manifest>

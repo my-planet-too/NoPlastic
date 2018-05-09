@@ -13,7 +13,6 @@ import android.support.v4.app.NotificationCompat;
 import android.util.Log;
 
 import org.androidannotations.annotations.Background;
-import org.androidannotations.annotations.EService;
 import org.androidannotations.annotations.SystemService;
 import org.myplanettoo.noplastic.R;
 import org.myplanettoo.noplastic.database.NoPlasticDatabase;
@@ -22,7 +21,6 @@ import org.myplanettoo.noplastic.ui.activity.InfoActivity;
 import org.myplanettoo.noplastic.ui.activity.InfoActivity_;
 import org.myplanettoo.noplastic.ui.activity.MainActivity_;
 
-@EService
 public class NoPlasticService extends Service {
     public static final String TAG = "NoPlasticService";
     public static final String CHANNEL_ID = "no_plastic_channel";

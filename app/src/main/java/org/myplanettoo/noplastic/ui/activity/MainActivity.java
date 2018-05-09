@@ -34,7 +34,7 @@ public class MainActivity extends AppCompatActivity {
         viewModel.getCountInfo().observe(this, new Observer<Long>() {
             @Override
             public void onChanged(@Nullable Long count) {
-                textViewCount.setText(String.valueOf(count));
+                textViewCount.setText(String.valueOf(100 - count));
             }
         });
     }
